@@ -1,0 +1,43 @@
+.tiney {
+  text-align: center;
+}
+
+.tiney-logo {
+  height: 20vmin;
+  pointer-events: none;
+}
+
+.tineyer-logo {
+  height: 63px;
+  padding: 8px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tiney-logo {
+    animation: tiney-logo-spin infinite 2s linear;
+  }
+
+  .tineyer-logo:hover {
+    animation: tiney-logo-spin infinite 4s reverse;
+  }
+}
+
+.tiney-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+@keyframes tiney-logo-spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
