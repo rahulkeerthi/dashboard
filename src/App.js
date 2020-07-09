@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 // Material UI Components
 import AppBar from '@material-ui/core/AppBar';
+import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
@@ -12,11 +13,59 @@ import './components/AppBar.scss';
 // Other 3rd Party
 import Swal from 'sweetalert2';
 
-// Spinners
+// Own Components
 import TineyerSpinner from './components/spinner/TineyerSpinner';
 import TineySpinner from './components/spinner/TineySpinner';
+import DataTable from './components/DataTable';
 
 const axios = require('axios').default;
+
+const providerHeaders = [
+  { field: 'providerSlug', hidden: true },
+  { field: 'address', hidden: true },
+  { field: 'city', hidden: true },
+  {
+    title: '',
+    field: 'image',
+    sorting: false,
+    searchable: false,
+    filtering: false,
+    render: ({ name, image }) => <Avatar alt={name} src={image} />,
+  },
+  { title: 'Name', field: 'name' },
+  { title: 'Email', field: 'email', sorting: false, searchable: false },
+  { field: 'postcode', hidden: true },
+  { title: 'Date of Birth', field: 'dob', type: 'date' },
+  {
+    title: 'Enrollments',
+    field: 'enrollments',
+    type: 'numeric',
+    sorting: false,
+    searchable: false,
+    initialEditValue: 0,
+    editable: 'never',
+  },
+  {
+    title: 'Active',
+    field: 'active',
+    type: 'numeric',
+    sorting: false,
+    searchable: false,
+    initialEditValue: 0,
+  },
+  {
+    title: 'Registration Date',
+    field: 'registrationDate',
+    type: 'date',
+    hidden: true,
+  },
+];
+const childrenHeaders = [
+  { title: 'Slug', field: 'childSlug', hidden: true },
+  { title: 'Name', field: 'name' },
+  { title: 'Start Date', field: 'startDate', type: 'date' },
+  { title: 'Guardians', field: 'guardiansCount', type: 'numeric' },
+];
 
 class App extends Component {
   state = {
@@ -77,8 +126,24 @@ class App extends Component {
           <Container style={{ marginTop: '16px' }}>
             {error && <TineySpinner message={error} />}
             <Switch>
-              <Route path={'/providers' || '/'} />
-              <Route exact path="/children" />
+              <Route path={'/providers' || '/'}>
+                <DataTable
+                  title="Providers Database"
+                  headers={providerHeaders}
+                  kids={children}
+                  providers={providers}
+                  providersTable
+                />
+              </Route>
+              <Route exact path="/children">
+                <DataTable
+                  title="Children Database"
+                  headers={childrenHeaders}
+                  kids={children}
+                  providers={providers}
+                  providersTable={false}
+                />
+              </Route>
             </Switch>
           </Container>
         </div>
