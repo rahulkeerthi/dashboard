@@ -1,0 +1,18 @@
+.appbar {
+  flex-grow: 1;
+  // background-color: grey;
+  justify-content: center;
+
+  &__tab {
+    height: 80px;
+  }
+
+  &__logo {
+    flex-grow: 1;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: white;
+  }
+}
