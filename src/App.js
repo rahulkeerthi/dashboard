@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 // React
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
@@ -10,16 +11,16 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import './components/AppBar.scss';
 
-// Other 3rd Party
+// Other Components
 import Swal from 'sweetalert2';
-
-// Own Components
 import TineyerSpinner from './components/spinner/TineyerSpinner';
 import TineySpinner from './components/spinner/TineySpinner';
 import DataTable from './components/DataTable';
 
+// Other External
 const axios = require('axios').default;
 
+// Define headers for provider table
 const providerHeaders = [
   { field: 'providerSlug', hidden: true },
   { field: 'address', hidden: true },
@@ -30,6 +31,7 @@ const providerHeaders = [
     sorting: false,
     searchable: false,
     filtering: false,
+    // eslint-disable-next-line react/prop-types
     render: ({ name, image }) => <Avatar alt={name} src={image} />,
   },
   { title: 'Name', field: 'name' },
@@ -60,6 +62,8 @@ const providerHeaders = [
     hidden: true,
   },
 ];
+
+// Define headers for children table
 const childrenHeaders = [
   { title: 'Slug', field: 'childSlug', hidden: true },
   { title: 'Name', field: 'name' },
@@ -75,12 +79,16 @@ class App extends Component {
     error: null,
   };
 
+  // Make data calls when components are mounted
   async componentDidMount() {
+    // Set loading state and unset when resolved
     this.setState({ isLoading: true });
 
+    // Set base URL independently so can be adjusted if DB deployed elsewhere
     const baseUrl = `http://localhost:3001`;
 
     const providerResponse = await axios.get(`${baseUrl}/providers`).catch((err) => {
+      // Fire error alert if fetch fails
       Swal.fire({
         title: 'Error!',
         text: err.message,
@@ -90,6 +98,7 @@ class App extends Component {
     });
 
     const childrenResponse = await axios.get(`${baseUrl}/children`).catch((err) => {
+      // Fire error alert if fetch fails
       Swal.fire({
         title: 'Error!',
         text: err.message,
@@ -126,7 +135,7 @@ class App extends Component {
           <Container style={{ marginTop: '16px' }}>
             {error && <TineySpinner message={error} />}
             <Switch>
-              <Route path={'/providers' || '/'}>
+              <Route path={'/providers' | '/'}>
                 <DataTable
                   title="Providers Database"
                   headers={providerHeaders}

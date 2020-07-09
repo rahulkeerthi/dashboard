@@ -33,7 +33,8 @@ const axios = require('axios').default;
 const moment = require('moment');
 const RandExp = require('randexp');
 
-// Material Table uses forwardRef to obtain the refs and forward it to the icon components that it renders
+// Material Table uses forwardRef to obtain the refs and
+// forward it to the icon components that it renders
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -203,7 +204,7 @@ function DataTable({ title, headers, kids, providers, providersTable }) {
         data: postData,
       })
         // deal with success and failure
-        .then((response) => {
+        .then(() => {
           Swal.fire({
             title: 'Success!',
             text: 'New provider added!',
@@ -242,7 +243,7 @@ function DataTable({ title, headers, kids, providers, providersTable }) {
         // makes data editable, only deals with adding a new row
         editable={{
           // * Adding new providers writes to db as intended but table needs refreshing
-          // * Unable to get the table to re-render, likely easiest solution is to make component stateful
+          // * Unable to re-render table, considering making component stateful
           onRowAdd: (newData) =>
             new Promise((resolve) => {
               setTimeout(() => {
