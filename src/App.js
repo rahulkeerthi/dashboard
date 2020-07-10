@@ -135,7 +135,7 @@ class App extends Component {
           <Container style={{ marginTop: '16px' }}>
             {error && <TineySpinner message={error} />}
             <Switch>
-              <Route path="/providers">
+              <Route exact path={['/providers', '/']}>
                 <DataTable
                   title="Providers Database"
                   headers={providerHeaders}
