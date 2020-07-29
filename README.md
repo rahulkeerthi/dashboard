@@ -1,4 +1,4 @@
-## Tech Test for tiney
+## Childminder Dashboard (Tech Test)
 
 User stories contained in this app are as follows:
 
